@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import {DeleteInvoice, UpdateInvoice} from '@/app/ui/invoices/buttons';
+import {UpdateInvoice} from '@/app/ui/invoices/buttons';
 import {fetchFilteredCircles} from '@/app/lib/data';
 import styles from '@/app/ui/cut.module.css'
 import IsAdult from "@/app/ui/invoices/status";
@@ -35,7 +35,6 @@ export default async function InvoicesTable({
                     </div>
                     <p className="text-sm text-gray-500">{circle.penname}</p>
                   </div>
-                  <IsAdult adult={circle.adult}/>
                 </div>
                 <div className="flex w-full items-center justify-between pt-4">
                   <div>
@@ -45,8 +44,9 @@ export default async function InvoicesTable({
                     <p>{circle.sakuhincode}（{circle.sakuhin}）</p>
                   </div>
                   <div className="flex justify-end gap-2">
+                    <IsAdult adult={circle.adult}/>
                     <UpdateInvoice id={circle.id}/>
-                    <DeleteInvoice id={circle.id}/>
+                    {/*<DeleteInvoice id={circle.id}/>*/}
                   </div>
                 </div>
               </div>
@@ -65,13 +65,13 @@ export default async function InvoicesTable({
                 ペンネーム
               </th>
               <th scope="col" className="px-3 py-5 font-medium">
-                Amount
+                メディア
               </th>
               <th scope="col" className="px-3 py-5 font-medium">
-                Date
+                作品
               </th>
               <th scope="col" className="px-3 py-5 font-medium">
-                Status
+                成年向け
               </th>
               <th scope="col" className="relative py-3 pl-6 pr-3">
                 <span className="sr-only">Edit</span>
@@ -113,7 +113,7 @@ export default async function InvoicesTable({
                 <td className="whitespace-nowrap py-3 pl-6 pr-3">
                   <div className="flex justify-end gap-3">
                     <UpdateInvoice id={circle.id}/>
-                    <DeleteInvoice id={circle.id}/>
+                    {/*<DeleteInvoice id={circle.id}/>*/}
                   </div>
                 </td>
               </tr>
