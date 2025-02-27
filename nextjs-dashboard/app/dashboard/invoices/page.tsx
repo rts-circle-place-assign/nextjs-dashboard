@@ -26,6 +26,7 @@ export default async function Page(props: {
       <div className="flex w-full items-center justify-between">
         <h1 className={`text-2xl`}>サークル概要検索</h1>
       </div>
+      <p className="mt-1">最新20件を表示しています。</p>
       <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
         <Search placeholder="Search invoices..."/>
         <CreateInvoice/>
