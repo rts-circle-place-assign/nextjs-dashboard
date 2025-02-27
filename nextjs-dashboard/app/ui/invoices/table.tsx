@@ -3,6 +3,7 @@ import {UpdateInvoice} from '@/app/ui/invoices/buttons';
 import {fetchFilteredCircles} from '@/app/lib/data';
 import styles from '@/app/ui/cut.module.css'
 import IsAdult from "@/app/ui/invoices/status";
+import Link from "next/link";
 
 export default async function InvoicesTable({
                                               query,
@@ -58,6 +59,9 @@ export default async function InvoicesTable({
               <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
                 サークルカット
               </th>
+              <th className="px-3 py-5 font-medium">
+                id
+              </th>
               <th>
                 サークル名
               </th>
@@ -94,6 +98,9 @@ export default async function InvoicesTable({
                     />
 
                   </div>
+                </td>
+                <td>
+                  <Link href={``}><p>{circle.circleid}</p></Link>
                 </td>
                 <td>
                   <p>{circle.circlename}</p>
