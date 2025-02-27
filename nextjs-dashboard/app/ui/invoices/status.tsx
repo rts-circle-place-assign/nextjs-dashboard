@@ -6,7 +6,7 @@ export default function IsAdult({adult}: { adult: number }) {
   return (
     <span
       className={clsx(
-        'inline-flex items-center rounded-full px-2 py-1 text-xs',
+        'inline-flex items-center rounded-xl md:rounded-full px-2 py-1 text-xs',
         {
           'bg-red-500 text-white': adult === 1,
           'bg-green-500 text-white': adult === 0,
