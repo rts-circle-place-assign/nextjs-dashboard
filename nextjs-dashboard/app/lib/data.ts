@@ -1,12 +1,14 @@
 import postgres from 'postgres';
 import {
+  Circle,
   CircleBaseInfo,
   CustomerField,
   CustomersTableType,
-  InvoiceForm,
   InvoicesTable,
   LatestInvoiceRaw,
-  Revenue
+  Media,
+  Revenue,
+  Sakuhin
 } from './definitions';
 import {formatCurrency} from './utils';
 
@@ -145,22 +147,46 @@ export async function fetchInvoicesPages(query: string) {
 
 export async function fetchInvoiceById(id: string) {
   try {
-    const data = await sql<InvoiceForm[]>`
-      SELECT invoices.id,
-             invoices.customer_id,
-             invoices.amount,
-             invoices.status
-      FROM invoices
-      WHERE invoices.id = ${id};
+    const data = await sql<Circle[]>`
+      SELECT id,
+             circleid,
+             "isSecond",
+             msnum,
+             gattainum,
+             "friendCode",
+             spnum,
+             circlename,
+             circlenamekana,
+             penname,
+             pennamekana,
+             sakuhincode,
+             mediacode,
+             hosoku,
+             adult,
+             musicgenre,
+             bookcharacter,
+             bookgenre,
+             bookseijingenre,
+             goodsgenre,
+             web,
+             webok,
+             pixiv,
+             pixivok,
+             twitter,
+             twitterok,
+             cutid,
+             name,
+             code
+      FROM circles
+      WHERE circles.id = ${id};
     `;
 
-    const invoice = data.map((invoice) => ({
-      ...invoice,
+    const circle = data.map((circle) => ({
+      ...circle,
       // Convert amount from cents to dollars
-      amount: invoice.amount / 100,
     }));
 
-    return invoice[0];
+    return circle[0];
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch invoice.');
@@ -234,9 +260,10 @@ export async function fetchFilteredCircles(
   try {
     const circles = await sql<CircleBaseInfo[]>`
       SELECT circles.id,
+             circles.circleid,
              circles.circlename,
              circles.penname,
-             circles.cutId,
+             circles.cutid,
              circles.adult,
              mediacodes.mediacode,
              mediacodes.media,
@@ -256,5 +283,27 @@ export async function fetchFilteredCircles(
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch invoices.');
+  }
+}
+
+export async function fetchMediaCodes() {
+  try {
+    return await sql<Media[]>`
+      SELECT mediacode, media
+      FROM mediacodes`
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch all media codes.');
+  }
+}
+
+export async function fetchSakuhinCodes() {
+  try {
+    return await sql<Sakuhin[]>`
+      SELECT sakuhincode, sakuhin
+      FROM sakuhincodes`
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch all sakuhin codes.');
   }
 }

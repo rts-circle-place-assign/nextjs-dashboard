@@ -2,6 +2,7 @@
 // It describes the shape of the data, and what data type each property should accept.
 // For simplicity of teaching, we're manually defining these types.
 // However, these types are generated automatically if you're using an ORM such as Prisma.
+
 export type User = {
   id: string;
   name: string;
@@ -89,6 +90,7 @@ export type InvoiceForm = {
 
 export type CircleBaseInfo = {
   id: string
+  circleid: number;
   circlename: string
   circlenamekana: string
   penname: string
@@ -98,11 +100,11 @@ export type CircleBaseInfo = {
   media: string
   sakuhincode: string
   sakuhin: string
-  adult: number
+  adult: boolean
 }
 export type Circle = {
   id: string
-  rtsId: string
+  circleid: number
   msnum?: string
   gattainum?: string
   isSecond: boolean
@@ -113,40 +115,38 @@ export type Circle = {
   pennamekana: string
   sakuhincode: string
   mediacode: number
-  seijin: number
+  adult: boolean
   hosoku?: string
   web?: string
-  webok: number
+  webok: boolean
   pixiv?: string
-  pixivok: number
+  pixivok: boolean
   twitter?: string
-  twitterok: number
-  twitterfollowers: number
+  twitterok: boolean
   musicgenre?: string
   bookcharacter?: string
   bookgenre?: string
   bookseijingenre?: string
   goodsgenre?: string
-  hanpu1name?: string
-  hanpu1date?: number
-  hanpu1price?: number
-  hanpu1amount?: number
-  hanpu2name?: string
-  hanpu2date?: number
-  hanpu2price?: number
-  hanpu2amount?: number
-  hanpu3name?: string
-  hanpu3date?: number
-  hanpu3price?: number
-  hanpu3amount?: number
-  hanpu4name?: string
-  hanpu4date?: number
-  hanpu4price?: number
-  hanpu4amount?: number
-  hanpu5name?: string
-  hanpu5date?: number
-  hanpu5price?: number
-  hanpu5amount?: number
   cutid: number
   spnum: number
+  name: string
+}
+
+export type Hanpu = {
+  circleid: number
+  hanpuname: string
+  hanpudate: Date
+  hanpuprice: number
+  hanpuamount: number
+}
+
+export type Media = {
+  mediacode: number
+  media: string
+}
+
+export type Sakuhin = {
+  sakuhincode: string
+  sakuhin: string
 }
