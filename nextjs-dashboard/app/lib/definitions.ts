@@ -86,3 +86,67 @@ export type InvoiceForm = {
   amount: number;
   status: 'pending' | 'paid';
 };
+
+export type CircleBaseInfo = {
+  id: string
+  circlename: string
+  circlenamekana: string
+  penname: string
+  pennamekana: string
+  cutid: number
+  mediacode: number
+  media: string
+  sakuhincode: string
+  sakuhin: string
+  adult: number
+}
+export type Circle = {
+  id: string
+  rtsId: string
+  msnum?: string
+  gattainum?: string
+  isSecond: boolean
+  friendCode?: string
+  circlename: string
+  circlenamekana: string
+  penname: string
+  pennamekana: string
+  sakuhincode: string
+  mediacode: number
+  seijin: number
+  hosoku?: string
+  web?: string
+  webok: number
+  pixiv?: string
+  pixivok: number
+  twitter?: string
+  twitterok: number
+  twitterfollowers: number
+  musicgenre?: string
+  bookcharacter?: string
+  bookgenre?: string
+  bookseijingenre?: string
+  goodsgenre?: string
+  hanpu1name?: string
+  hanpu1date?: number
+  hanpu1price?: number
+  hanpu1amount?: number
+  hanpu2name?: string
+  hanpu2date?: number
+  hanpu2price?: number
+  hanpu2amount?: number
+  hanpu3name?: string
+  hanpu3date?: number
+  hanpu3price?: number
+  hanpu3amount?: number
+  hanpu4name?: string
+  hanpu4date?: number
+  hanpu4price?: number
+  hanpu4amount?: number
+  hanpu5name?: string
+  hanpu5date?: number
+  hanpu5price?: number
+  hanpu5amount?: number
+  cutid: number
+  spnum: number
+}

@@ -1,5 +1,13 @@
 import postgres from 'postgres';
-import {CustomerField, CustomersTableType, InvoiceForm, InvoicesTable, LatestInvoiceRaw, Revenue,} from './definitions';
+import {
+  CircleBaseInfo,
+  CustomerField,
+  CustomersTableType,
+  InvoiceForm,
+  InvoicesTable,
+  LatestInvoiceRaw,
+  Revenue
+} from './definitions';
 import {formatCurrency} from './utils';
 
 const sql = postgres(process.env.POSTGRES_URL!, {ssl: 'require'});
@@ -212,5 +220,54 @@ export async function fetchFilteredCustomers(query: string) {
   } catch (err) {
     console.error('Database Error:', err);
     throw new Error('Failed to fetch customer table.');
+  }
+}
+
+export async function fetchAllBaseData() {
+  try {
+    const circles = await sql<CircleBaseInfo[]>`SELECT id, circlename, penname, pennamekana
+                                                FROM circles`
+    return circles
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch all base data.');
+  }
+}
+
+export async function fetchFilteredCircles(
+  query: string,
+  currentPage: number,
+) {
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  try {
+    const circles = await sql<CircleBaseInfo[]>`
+      SELECT circles.id,
+             circles.circlename,
+             circles.penname,
+             circles.cutId,
+             circles.adult,
+             mediacodes.mediacode,
+             mediacodes.media,
+             sakuhincodes.sakuhincode,
+             sakuhincodes.sakuhin
+      FROM circles
+             JOIN mediacodes ON circles.mediacode = mediacodes.mediacode
+             JOIN sakuhincodes ON circles.sakuhincode = sakuhincodes.sakuhincode
+      WHERE circles.circlename ILIKE ${`%${query}%`}
+         OR
+        circles.penname ILIKE ${`%${query}%`}
+         OR
+        circles.circlenamekana ILIKE ${`%${query}%`}
+         OR
+        circles.pennamekana ILIKE ${`%${query}%`}
+        LIMIT ${ITEMS_PER_PAGE}
+      OFFSET ${offset}
+    `;
+
+    return circles;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch invoices.');
   }
 }

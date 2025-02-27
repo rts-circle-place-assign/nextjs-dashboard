@@ -1,18 +1,6 @@
 import '@/app/ui/global.css'
 import TypekitLoader from '@/app/ui/fonts'
-import {Inter, Roboto_Mono} from 'next/font/google'
 import {Metadata} from 'next';
-
-const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-inter',
-})
-const roboto_mono = Roboto_Mono({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-roboto-mono',
-})
 
 export const metadata: Metadata = {
   title: {
