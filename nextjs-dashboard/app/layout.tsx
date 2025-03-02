@@ -1,6 +1,7 @@
 import '@/app/ui/global.css'
 import TypekitLoader from '@/app/ui/fonts'
 import {Metadata} from 'next';
+import {Providers} from "./providers";
 
 export const metadata: Metadata = {
   title: {
@@ -17,9 +18,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ja">
+    <html lang="ja" className="dark">
     <TypekitLoader/>
-    <body className="font-dnpshueigothic">{children}</body>
+    <body className="font-dnpshueigothic">
+    <Providers>{children}</Providers>
+    </body>
     </html>
   );
 }
