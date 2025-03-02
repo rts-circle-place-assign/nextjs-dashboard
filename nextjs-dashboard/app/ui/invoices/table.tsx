@@ -30,7 +30,9 @@ export default async function InvoicesTable({
                         src={`https://${process.env.SUPABASE_IMAGE_ID!}.supabase.co/storage/v1/object/public/RTS22_cut/${circle.cutid}.png`}
                         className={`mr-2 rounded-md ${styles.image}`}
                         fill
-                        alt={`${circle.circlename}'s profile picture`}
+                        loading="lazy"
+                        priority={false}
+                        alt={`${circle.circlename}のサークルカット画像`}
                       />
                       <p className="text-xl">{circle.circlename}</p>
                     </div>
@@ -94,7 +96,7 @@ export default async function InvoicesTable({
                       src={`https://${process.env.SUPABASE_IMAGE_ID!}.supabase.co/storage/v1/object/public/RTS22_cut/${circle.cutid}.png`}
                       className={`rounded-md ${styles.image}`}
                       fill
-                      alt={`${circle.circlename}'s profile picture`}
+                      alt={`${circle.circlename}のサークルカット画像`}
                     />
 
                   </div>

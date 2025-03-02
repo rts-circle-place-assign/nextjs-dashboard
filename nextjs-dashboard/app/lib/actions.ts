@@ -14,6 +14,9 @@ export type State = {
     mediacode?: string[];
     sakuhincode?: string[];
     adult?: string[];
+    webok?: string[];
+    twitterok?: string[];
+    pixivok?: string[];
   };
   message?: string | null;
 };
@@ -45,11 +48,20 @@ const FormSchema = z.object({
   ),
   hosoku: z.string(),
   web: z.string(),
-  webok: z.boolean(),
+  webok: z.enum(["true", "false"], {
+      invalid_type_error: 'どちらかを選択してください。'
+    }
+  ),
   pixiv: z.string(),
-  pixivok: z.boolean(),
+  pixivok: z.enum(["true", "false"], {
+      invalid_type_error: 'どちらかを選択してください。'
+    }
+  ),
   twitter: z.string(),
-  twitterok: z.boolean(),
+  twitterok: z.enum(["true", "false"], {
+      invalid_type_error: 'どちらかを選択してください。'
+    }
+  ),
   musicgenre: z.string(),
   bookcharacter: z.string(),
   bookgenre: z.string(),
@@ -62,7 +74,7 @@ const FormSchema = z.object({
 const ValidateItems = FormSchema.pick({
   gattainum: undefined,
   friendCode: undefined,
-  circlename: undefined,
+  circlename: true,
   circlenamekana: true,
   penname: true,
   pennamekana: true,
@@ -71,11 +83,11 @@ const ValidateItems = FormSchema.pick({
   adult: true,
   hosoku: undefined,
   web: undefined,
-  webok: undefined,
+  webok: true,
   pixiv: undefined,
-  pixivok: undefined,
+  pixivok: true,
   twitter: undefined,
-  twitterok: undefined,
+  twitterok: true,
   musicgenre: undefined,
   bookcharacter: undefined,
   bookgenre: undefined,
@@ -129,11 +141,11 @@ export async function updateInvoice(id: string, prevState: State, formData: Form
           adult           = ${(validatedData.adult === 'true')},
           hosoku          = ${validatedData.hosoku},
           web             = ${validatedData.web},
-          webok           = ${validatedData.webok},
+          webok           = ${validatedData.webok === 'true'},
           pixiv           = ${validatedData.pixiv},
-          pixivok         = ${validatedData.pixivok},
+          pixivok         = ${validatedData.pixivok === 'true'},
           twitter         = ${validatedData.twitter},
-          twitterok       = ${validatedData.twitterok},
+          twitterok       = ${validatedData.twitterok === 'true'},
           musicgenre      = ${validatedData.musicgenre},
           bookcharacter   = ${validatedData.bookcharacter},
           bookgenre       = ${validatedData.bookgenre},

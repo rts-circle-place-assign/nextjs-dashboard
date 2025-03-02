@@ -4,3 +4,10 @@
   width: auto !important;
   height: 100px !important;
 }
+
+.editCut {
+  object-fit: contain;
+  position: relative !important;
+  width: auto !important;
+  height: 200px !important;
+}

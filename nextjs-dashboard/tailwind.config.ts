@@ -1,14 +1,16 @@
-import type {Config} from 'tailwindcss';
+import { heroui } from '@heroui/theme'
+import type { Config } from 'tailwindcss'
 
 const config: Config = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './node_modules/@heroui/theme/dist/components/(input|radio|toggle|form).js',
   ],
   theme: {
     fontFamily: {
-      kinutamarumin: ['kinuta-maruminfuji-stdn', 'serif',],
+      kinutamarumin: ['kinuta-maruminfuji-stdn', 'serif'],
       dnpshueigothic: ['dnp-shuei-gothic-gin-std', 'sans-serif'],
     },
     extend: {
@@ -31,6 +33,8 @@ const config: Config = {
       },
     },
   },
-  plugins: [require('@tailwindcss/forms')],
-};
-export default config;
+  darkMode: 'class',
+  plugins: [require('@tailwindcss/forms'), heroui()],
+  important: true,
+}
+export default config
